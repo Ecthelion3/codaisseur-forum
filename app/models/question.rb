@@ -5,6 +5,8 @@ class Question < ApplicationRecord
   has_many :answers
   belongs_to :topic
 
+  validates_presence_of :title, :body, :topic_id
+
   scope :topic, -> (topic_id) { where topic_id: topic_id }
 
   def self.search(search)

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
     root 'questions#index'
     resources :questions do
-        resources :answers
+      resources :answers
     end
 
     resources :profiles
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'users/:id/approve'=> 'profiles#approve_user', as: 'approve_user'
 
     get 'users/:id/disable'=> 'profiles#disable_user', as: 'disable_user'
-    
+
     post 'profiles/edit-role' => 'profiles#edit_role'
-    
+
 end

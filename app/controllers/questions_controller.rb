@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction
 
   def index
     if user_signed_in?
@@ -13,35 +13,41 @@ helper_method :sort_column, :sort_direction
     else
       @questions = Question.order("#{sort_column} #{sort_direction}").filter(params.slice(:topic)).paginate(:page =>params[:page], :per_page => 5)
     end
-        
-      @random = Question.includes(:answers).where( :answers => { :question_id => nil } ).sample(1)
 
+    @random = Question.includes(:answers).where( :answers => { :question_id => nil } ).sample(1)
   end
 
   def show
     @question = Question.find(params[:id])
   end
 
+  def new
+    @question = Question.new
+  end
+
   def create
-    @question = Question.new(params.require(:question).permit(:title, :body, :topic_id))
+    @question = Question.new()
     @question.user = current_user
     authorize! :create, @question
-    @question.save
-    redirect_to @question
+    if @question.save(params.require(:question).permit(:title, :body, :topic_id))
+      redirect_to @question
+    else
+      render :new
+    end
   end
 
 
- def update
+  def update
     @question = Question.find(params[:question_id])
-  
-     if @question.update(params.permit(:body, :title, :topic_id, :user_id))
-       render json: @question
-     else
-       render json: {error: "could not update question"}
-     end
- end
 
- def destroy
+    if @question.update(params.permit(:body, :title, :topic_id, :user_id))
+      render json: @question
+    else
+      render json: {error: "could not update question"}
+    end
+  end
+
+  def destroy
 
     @question = Question.find(params[:id])
 

@@ -17,7 +17,7 @@
         </div>
         <% end %>
         <% if @questions.present? %>
-          <% render "form" %>
+          <% render "form" if @question.present? %>
         <% else %>
           <p>There are no questions containing the term(s) <%= params[:search] %>.</p>
         <% end %>

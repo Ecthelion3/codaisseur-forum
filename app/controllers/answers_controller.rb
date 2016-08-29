@@ -9,8 +9,9 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = Answer.new(params.require(:answer).permit(:body, :user_id, :question_id))
-    @answer.user_id = current_user.id
+    @answer = Answer.new(params.require(:answer).permit(:body, :user_id))
+    @answer.question = @question
+    @answer.user = current_user
 
     if @answer.save
       redirect_to question_path(@question)

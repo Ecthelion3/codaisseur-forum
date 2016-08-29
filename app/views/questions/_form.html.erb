@@ -1,31 +1,27 @@
 
 
 <div class="row new-question">
-<%= form_for :question, class: "form-group" , url: questions_path do |f| %>
+<%= bootstrap_form_for @question, class: "form-group" , url: questions_path do |f| %>
 
 <div class="field col-xs-4">
  <br><br>
-  <%= f.collection_select :topic_id, Topic.all, :id, :title, {:label => "Choose topic"}, {:class => 'form-control'} %>
+  <%= f.collection_select :topic_id, Topic.all, :id, :title, { label: "Choose topic", prompt: true }, { class: 'form-control' } %>
 </div>
 
 <div class="col-xs-8 text-right">
    <%= link_to 'Cancel', root_path, class: 'btn btn-default'  %>
  <%= f.submit class: 'btn btn-codaisseur' %>
-    
+
 </div>
 
 <div class="col-xs-12">
  <br>
-  <%= f.text_field :title, class: "form-control", placeholder: "Type a title for your question..." %>
+  <%= f.text_field :title, placeholder: "Type a title for your question..." %>
 </div>
 
  <div class="col-xs-12">
     <br>
-  <%= f.text_area :body, class: "form-control", placeholder: "Add question details...", size: "40x15" %>
-</div>
-<div class="col-xs-12">
-<br>
-  <%= f.file_field :image_url %>
+  <%= f.text_area :body, placeholder: "Add question details...", size: "40x15" %>
 </div>
 
 
