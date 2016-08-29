@@ -73,7 +73,7 @@
             </p>
 
 
-            <div id="answer-<%= answer.id %>" class="answer-content"><%= markdown(answer.body) %></div>
+            <div id="answer-<%= answer.id %>" class="answer-content"><%= markdown(answer.body.to_s) %></div>
 
             <div id="form-<%= answer.id %>" class="edit-answer-form">
               <textarea class='form-control edit-body' name="name" rows="6">
