@@ -72,7 +72,10 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    emoji (1.0.7)
+      json
     erubis (2.7.0)
+    escape_utils (1.2.1)
     excon (0.45.4)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -327,6 +330,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   concurrent-ruby
   devise
+  emoji
+  escape_utils
   fog
   font-awesome-rails
   jbuilder (~> 2.5)

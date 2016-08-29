@@ -6,29 +6,31 @@ module ApplicationHelper
         icon = column == sort_column ? icon : ""
         link_to "#{title} <span class='#{icon}'></span>".html_safe, {column: column, direction: direction}
     end
-    
-    
+
+
     class CodeRayify < Redcarpet::Render::HTML
       def block_code(code, language)
         CodeRay.scan(code, language).div
+      rescue
+        code
       end
     end
 
     def markdown(text)
-      coderayified = CodeRayify.new(:filter_html => true, 
-                                    :hard_wrap => true)
+      return text if text.blank?
+      coderayified = CodeRayify.new(filter_html: true, hard_wrap: true)
       options = {
-        :fenced_code_blocks => true,
-        :no_intra_emphasis => true,
-        :autolink => true,
-        :strikethrough => true,
-        :lax_html_blocks => true,
-        :superscript => true
+        fenced_code_blocks: true,
+        no_intra_emphasis: true,
+        autolink: true,
+        strikethrough: true,
+        lax_html_blocks: true,
+        superscript: true
       }
       markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
       markdown_to_html.render(text).html_safe
     end
-    
+
     def bootstrap_class_for(flash_type)
       case flash_type
       when "success"
