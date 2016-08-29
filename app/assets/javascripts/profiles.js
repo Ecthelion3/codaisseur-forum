@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
 
     $('.edit-role').click(function(){
       var user_id = $(this).attr('id');

@@ -12,13 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require ./answers
+//= require ./profiles
+//= require ./questions
 //= require bootstrap.min
 
-
-
-
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
 $(".dropdown").hover(
         function() {
             $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");

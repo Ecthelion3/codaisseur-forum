@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Codaisseur Forum</title>
-    <%= csrf_meta_tags %>
+  <head>
+  <title>Codaisseur Forum</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'cable', 'data-turbolinks-track': 'reload' if user_signed_in? %>
+  <%= favicon_link_tag 'favicon.ico' %>
 
-    </head>
+  </head>
 
-    <body>
-        <%= render "layouts/navbar" %>
-        <div class="container">
-         <%= render partial: "shared/flash_messages", flash: flash %>
-        <%= yield %>
-        </div>
-        <%= render "layouts/footer" %>
-    </body>
+  <body data-user-id="<%= current_user && current_user.id || 0 %>">
+    <%= render "layouts/navbar" %>
+    <div class="container">
+     <%= render partial: "shared/flash_messages", flash: flash %>
+    <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
+  </body>
 </html>

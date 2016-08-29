@@ -2,6 +2,12 @@ Rails.application.routes.draw do
     devise_for :users, :controllers => { :registrations => "registrations" }
 
     root 'questions#index'
+
+    # Serve websocket cable requests in-process
+    authenticate :user do
+      mount ActionCable.server => '/cable'
+    end
+
     resources :questions do
       resources :answers do
         resources :votes, only: [:create, :destroy], controller: 'votes'

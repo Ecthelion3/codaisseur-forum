@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
       console.log("I'm IN");
   $('.q-edit-btn').click(function(){
     var id = $(this).attr('id');

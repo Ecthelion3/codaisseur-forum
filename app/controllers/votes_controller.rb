@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  after_action :broadcast_votes
+
   def create
     vote = current_user.votes.where(votable: votable, vote: -1).first
     if vote.present?
@@ -9,7 +11,6 @@ class VotesController < ApplicationController
       vote.vote = 1
       vote.save
     end
-    render json: votable_json
   end
 
   def destroy
@@ -22,17 +23,26 @@ class VotesController < ApplicationController
       vote.vote = -1
       vote.save
     end
-    render json: votable_json
+    render json: votable_attributes
   end
 
   private
 
-  def votable_json
+  def broadcast_votes
+    ActionCable.server.broadcast 'votes',
+      votable_attributes
+
+    head :ok
+  end
+
+  def votable_attributes
     votable.attributes.merge(
       rating: votable.rating,
       can_vote: votable.can_vote?(current_user),
       voted_down: votable.voted_down?(current_user),
-      voted_up: votable.voted_up?(current_user))
+      voted_up: votable.voted_up?(current_user),
+      user_id: current_user.id,
+      dom_id: "#{votable.class.name}_#{votable.id}")
   end
 
   def votable
