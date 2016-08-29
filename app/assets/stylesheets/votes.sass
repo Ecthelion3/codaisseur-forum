@@ -1,0 +1,26 @@
+.vote-widget
+  width: 20px
+  margin: 10px auto
+  color: #ababab
+  text-align: center
+
+  .plus > a,
+  .minus > a
+    display: block
+    width: 0
+    height: 0
+    border-style: solid
+    border-width: 0 10px 10px 10px
+    border-color: transparent transparent #bababa transparent
+    text-indent: -1000px
+    overflow: hidden
+
+    &.active
+      border-color: transparent transparent #c1272d transparent
+
+  .minus > a
+    border-width: 10px 10px 0 10px
+    border-color: #bababa transparent transparent transparent
+
+    &.active
+      border-color: #c1272d transparent transparent transparent

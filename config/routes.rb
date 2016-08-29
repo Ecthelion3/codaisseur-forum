@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
     root 'questions#index'
     resources :questions do
-      resources :answers
+      resources :answers do
+        resources :votes, only: [:create, :destroy], controller: 'votes'
+      end
+      resources :votes, only: [:create, :destroy], controller: 'votes'
     end
 
     resources :profiles

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   scope :approved, -> (approved) { where approved: approved }
 
   has_one :profile
+  has_many :votes
 
   def active_for_authentication?
     super && approved?

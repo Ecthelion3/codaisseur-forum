@@ -56,7 +56,12 @@
 
       <% @questions.each do |question| %>
         <tr>
-          <td style="text-align:right"><%= render partial: "layouts/avatar", locals: { user: question.user } %></td>
+          <td style="text-align:right">
+            <%= render partial: "layouts/avatar", locals: { user: question.user } %>
+            <div style="float: left">
+              <%= render partial: "votes/widget", locals: { question: question } %>
+            </div>
+          </td>
           <td><h4><%= link_to question.title, question %></h4><p><%= time_ago_in_words(question.created_at).capitalize %> ago by <%= link_to question.user.profile.full_name, controller: :profiles, action: :show, id: question.user.profile.id %></p><p class="btn btn-topic"><%= question.topic.title %></p></td>
           <td class="text-center"><h3>
             <%= question.answers.count %></h3><p>Answers</p>

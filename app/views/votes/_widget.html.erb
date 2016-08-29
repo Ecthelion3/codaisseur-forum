@@ -1,0 +1,20 @@
+<%
+  answer ||= nil
+  votable = answer || question
+  if votable.class.name == "Question"
+    upvote_path = question_votes_path(question)
+    downvote_path = question_vote_path(question, 1)
+  elsif votable.class.name == "Answer"
+    upvote_path = question_answer_votes_path(question, answer)
+    downvote_path = question_answer_vote_path(question, answer, 1)
+  end
+%>
+<div class="vote-widget">
+  <div class="plus">
+    <%= link_to "+1", '#', data: { url: upvote_path }, class: votable.voted_up?(current_user) ? 'active' : '' %>
+  </div>
+  <div class="rating"><%= votable.rating %></div>
+  <div class="minus">
+    <%= link_to "-1", '#', data: { url: downvote_path }, class: votable.voted_down?(current_user) ? 'active' : '' %>
+  </div>
+</div>

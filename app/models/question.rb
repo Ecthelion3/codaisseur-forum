@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
   include Filterable
+  include IsVotable
 
   belongs_to :user
   has_many :answers
