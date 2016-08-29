@@ -28,7 +28,8 @@ module ApplicationHelper
         superscript: true
       }
       markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
-      markdown_to_html.render(Emoji.replace_unicode_moji_with_images(text)).html_safe
+      md = markdown_to_html.render(text).html_safe
+      Emoji.replace_unicode_moji_with_images(md)
     end
 
     def bootstrap_class_for(flash_type)
