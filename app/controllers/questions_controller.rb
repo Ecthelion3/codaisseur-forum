@@ -26,10 +26,10 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new()
+    @question = Question.new(question_params)
     @question.user = current_user
     authorize! :create, @question
-    if @question.save(params.require(:question).permit(:title, :body, :topic_id))
+    if @question.save()
       redirect_to @question
     else
       render :new
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:question_id])
 
-    if @question.update(params.permit(:body, :title, :topic_id, :user_id))
+    if @question.update(question_params)
       render json: @question
     else
       render json: {error: "could not update question"}
@@ -75,5 +75,9 @@ class QuestionsController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
+  def question_params
+    params.require(:question).permit(:body, :title, :topic_id)
   end
 end
