@@ -12,7 +12,7 @@
     <span class="avatar">
   <% end %>
 <% end %>
-    <% if user.profile.present? %>
+    <% if user.profile.present? && user.profile.avatar.present? %>
       <%= link_to image_tag(user.profile.avatar.url(size)), controller: :profiles, action: :show, id: user.profile.id %>
     <% end %>
 </span>
