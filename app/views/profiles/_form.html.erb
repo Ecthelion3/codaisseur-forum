@@ -2,10 +2,7 @@
     <div class="row">
         <div class="col-sm-4 col-sm-push-8">
             <h4>Your Account</h4>
-            <p>Minim tousled iPhone master cleanse
-            normcore bespoke. Aute magna truffaut
-            exercitation mustache gentrify migas cray,
-            tacos pabst mumblecore deserunt. </p>
+            <p>We're all in this together, and we would love to get to know you a little bit better. Where do you work? Which class did you do with Codaisseur? Take it away!</p>
         </div>
 
 
@@ -20,7 +17,7 @@
               <% else %>
                   <% @user = current_user %>
               <% end %>
-              <td><%= render partial: "layouts/avatar", locals: { user: @user, size: 'big' } %></td>
+              <td><%= render partial: "layouts/avatar", locals: { user: @user, size: :large } %></td>
               <td><%= f.file_field :avatar %></td>
             </tr>
             <tr>

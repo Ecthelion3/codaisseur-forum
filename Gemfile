@@ -51,11 +51,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap-sass'
 
-gem 'carrierwave'
 
 gem "cancancan"
 
-gem "cloudinary"
+gem 'carrierwave'
+gem 'mini_magick'
+gem "fog", require: "fog/aws/storage"
 
 gem "devise"
 

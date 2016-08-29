@@ -1,5 +1,5 @@
-<% size ||= 'small' %>
-<% if size == 'big' %>
+<% size ||= :small %>
+<% if size == :large %>
   <% if user.is_teacher? || user.is_admin? %>
     <span class="avatar-big avatar-teacher">
   <% else %>
@@ -13,6 +13,6 @@
   <% end %>
 <% end %>
     <% if user.profile.present? %>
-      <%= link_to image_tag(user.profile.avatar), controller: :profiles, action: :show, id: user.profile.id %>
+      <%= link_to image_tag(user.profile.avatar.url(size)), controller: :profiles, action: :show, id: user.profile.id %>
     <% end %>
 </span>

@@ -6,7 +6,7 @@ class Profile <  ActiveRecord::Base
     self.first_name + " " + self.last_name
   end
 
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar, AvatarUploader
 
   def self.search(search)
     where("first_name ILIKE ? ", "%#{search}%")
