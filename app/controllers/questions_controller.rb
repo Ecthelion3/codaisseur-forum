@@ -8,13 +8,16 @@ class QuestionsController < ApplicationController
       end
     end
 
+    @random = Question.includes(:answers).where( :answers => { :question_id => nil } ).sample(3)
+
     if params[:search]
-      @questions = Question.search(params[:search]).order(created_at: :desc).paginate(:page =>params[:page], :per_page => 5)
+      @questions = Question.search(params[:search]).order(created_at: :desc)
     else
-      @questions = Question.order("#{sort_column} #{sort_direction}").filter(params.slice(:topic)).paginate(:page =>params[:page], :per_page => 5)
+      @questions = Question.order("#{sort_column} #{sort_direction}").filter(params.slice(:topic))
     end
 
-    @random = Question.includes(:answers).where( :answers => { :question_id => nil } ).sample(1)
+    @questions = @questions.where('id NOT IN (?)', @random.any? ? @random.map(&:id) : [0]).
+      paginate(page: params[:page], per_page: 15)
   end
 
   def show
