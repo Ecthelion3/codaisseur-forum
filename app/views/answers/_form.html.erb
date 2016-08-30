@@ -2,8 +2,7 @@
 <table class="table">
     <td class="image-col-width"><%= render partial: "layouts/avatar", locals: { user: current_user } %></td>
     <td>
-      <%= bootstrap_form_for([@question, @question.answers.new], class: 'form-group', remote: true) do |f| %>
-        <%= f.hidden_field :question_id %>
+      <%= bootstrap_form_for([@question, @question.answers.new], remote: true) do |f| %>
         <%= f.text_area :body, hide_label: true, placeholder: "Add answer details...", rows: "8" %>
         <div class="actions">
           <%= f.submit "Post answer", class: 'btn btn-codaisseur' %>

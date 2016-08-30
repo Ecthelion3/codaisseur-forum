@@ -1,7 +1,14 @@
 document.addEventListener("turbolinks:load", function() {
+  newAnswer();
   submitAnswer();
   submitQuestion();
 });
+
+function newAnswer() {
+  $('#new_answer').submit(function(e) {
+    console.log(this);
+  });
+}
 
 function submitAnswer() {
   toggle('answer');
@@ -25,10 +32,10 @@ function submitAnswer() {
       error: function(response) {
         console.log(response);
       }
-    })
+    });
 
 
-  })
+  });
 
 }
 
@@ -54,22 +61,15 @@ function submitQuestion() {
       error: function(response) {
         console.log(response);
       }
-    })
-
-
-  })
+    });
+  });
 
 }
 
-
-
-
-
 function toggle(el) {
-
   $('.edit-btn-' + el).click(function(){
     var id = $(this).attr('id');
     $('#' + el + '-' + id).toggle();
     $('#form-'+id).toggle();
-  }
-)}
+  });
+}

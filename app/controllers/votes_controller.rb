@@ -23,7 +23,6 @@ class VotesController < ApplicationController
       vote.vote = -1
       vote.save
     end
-    render json: votable_attributes
   end
 
   private

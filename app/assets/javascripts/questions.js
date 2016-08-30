@@ -4,7 +4,7 @@ document.addEventListener("turbolinks:load", function() {
     var id = $(this).attr('id');
     $('#question-'+id).toggle();
     $('#form-'+id).toggle();
-  })
+  });
 
 
   $('.save-edit').click(function() {
@@ -25,8 +25,8 @@ document.addEventListener("turbolinks:load", function() {
       error: function(response) {
         console.log(response);
       }
-    })
+    });
 
 
-  })
+  });
 });
