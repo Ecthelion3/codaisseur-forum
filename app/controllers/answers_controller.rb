@@ -25,10 +25,16 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:answer_id])
+    @answer = Answer.find(params[:id])
 
     if @answer.update(answer_params)
-      render json: @answer
+      if request.xhr?
+        answer_out = render_to_string "/answers/_answer", layout: false
+        ActionCable.server.broadcast 'answers', answer_out
+        head :ok
+      else
+        redirect_to question_path(@question)
+      end
     else
       render json: {error: "could not update answer"}
     end

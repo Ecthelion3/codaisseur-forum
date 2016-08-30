@@ -1,5 +1,4 @@
 document.addEventListener("turbolinks:load", function() {
-      console.log("I'm IN");
   $('.q-edit-btn').click(function(){
     var id = $(this).attr('id');
     $('#question-'+id).toggle();
@@ -8,7 +7,6 @@ document.addEventListener("turbolinks:load", function() {
 
 
   $('.save-edit').click(function() {
-
     var question_id = $(this).attr('question_id');
     var body = $('#form-'+question_id + ' .edit-body').val();
 
@@ -26,7 +24,5 @@ document.addEventListener("turbolinks:load", function() {
         console.log(response);
       }
     });
-
-
   });
 });

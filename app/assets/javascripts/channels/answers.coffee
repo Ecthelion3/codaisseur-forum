@@ -10,7 +10,12 @@ App.answers = App.cable.subscriptions.create "AnswersChannel",
     container = $("tbody.border-top-answers")
     return unless $(data).data("questionId") == $(container).data("questionId")
     toAdd = $(data).addClass("just-loaded")
-    $(toAdd).appendTo(container)
+
+    if $("##{$(data).attr("id")}").length > 0
+      $("##{$(data).attr("id")}").replaceWith(toAdd)
+    else
+      $(toAdd).appendTo(container)
+
     window.setTimeout(->
       $(toAdd).removeClass('just-loaded');
     , 5000)

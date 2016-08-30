@@ -1,5 +1,5 @@
 <% answer ||= @answer %>
-<tr class="tr-answers" data-question-id="<%= @question.id %>">
+<tr class="tr-answers" data-question-id="<%= @question.id %>" id="answer-<%= answer.id %>">
   <td>
     <%= render partial: "layouts/avatar", locals: { user: answer.user } %>
     <%= render partial: "votes/widget", locals: { question: @question, answer: answer } %>
@@ -18,7 +18,7 @@
         <textarea class='form-control edit-body' name="name" rows="6">
           <%= answer.body %>
         </textarea>
-        <button answer_id="<%= answer.id %>" question_id="<%= @question.id %>" class="btn-codaisseur btn pull-right save-edit-answer">Save edit</button>
+        <button data-answer-id="<%= answer.id %>" data-question-id="<%= @question.id %>" class="btn-codaisseur btn pull-right save-edit-answer">Save edit</button>
       </div>
 
       <% if answer.user_id == current_user.id || current_user.is_admin? %>

@@ -6,7 +6,7 @@ document.addEventListener("turbolinks:load", function() {
       $(this).hide();
       $('.edit-role-form').hide();
       $('#role-form-' + user_id).show();
-    })
+    });
 
     $('.edit-role-select').change(function() {
 
@@ -28,6 +28,6 @@ document.addEventListener("turbolinks:load", function() {
         error: function(response) {
           console.log(response);
         }
-      })
+      });
     });
 });

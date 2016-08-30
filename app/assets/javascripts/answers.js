@@ -23,16 +23,21 @@ function submitAnswer() {
   toggle('answer');
 
   $('.save-edit-answer').click(function() {
-
-    var answer_id = $(this).attr('answer_id');
-    var question_id = $(this).attr('question_id');
+    var answer_id = $(this).data('answerId');
+    var question_id = $(this).data('questionId');
     var body = $('#form-'+answer_id + ' .edit-body').val();
 
     $.ajax({
       url: '/questions/'+question_id+'/answers/'+answer_id,
       type: 'PUT',
       dataType: "json",
-      data: {'body': body, 'question_id': question_id, 'answer_id': answer_id},
+      data: {
+        answer: {
+          body: body,
+          question_id: question_id,
+          answer_id: answer_id
+        }
+      },
       success: function(response) {
         $('#answer-'+answer_id).html(response.body).show();
         $('#form-'+answer_id).hide();
@@ -78,7 +83,8 @@ function submitQuestion() {
 function toggle(el) {
   $('.edit-btn-' + el).click(function(){
     var id = $(this).attr('id');
-    $('#' + el + '-' + id).toggle();
+    console.log(id)
+    $('#' + el + '-' + id + ' .td-' + el).toggle();
     $('#form-'+id).toggle();
   });
 }
