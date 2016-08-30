@@ -73,3 +73,5 @@ gem "font-awesome-rails"
 gem 'redcarpet'
 gem 'coderay'
 gem 'will_paginate-bootstrap'
+
+gem 'appsignal'
