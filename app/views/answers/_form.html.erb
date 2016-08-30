@@ -5,7 +5,7 @@
       <%= bootstrap_form_for([@question, @question.answers.new], remote: true) do |f| %>
         <%= f.text_area :body, hide_label: true, placeholder: "Add answer details...", rows: "8" %>
         <div class="actions">
-          <%= f.submit "Post answer", class: 'btn btn-codaisseur' %>
+          <%= f.submit "Post answer", id: "new_answer_button", class: 'btn btn-codaisseur' %>
         </div>
       <% end %>
     </td>

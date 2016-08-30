@@ -4,9 +4,18 @@ document.addEventListener("turbolinks:load", function() {
   submitQuestion();
 });
 
+$(document).ready(function() {
+  newAnswer();
+  submitAnswer();
+  submitQuestion();
+});
+
 function newAnswer() {
-  $('#new_answer').submit(function(e) {
-    console.log(this);
+  $('#new_answer_button').click(function(e) {
+    // UGLY HACK to clear textarea after 1 sec
+    window.setTimeout(function() {
+      $("#answer_body").val('');
+    }, 1000);
   });
 }
 
