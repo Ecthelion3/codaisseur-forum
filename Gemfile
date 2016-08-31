@@ -68,7 +68,8 @@ gem 'rails_12factor', group: :production
 
 gem 'concurrent-ruby'
 
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'gravatar_image_tag'
 
 gem 'redcarpet'
 gem 'coderay'
