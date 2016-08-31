@@ -2,25 +2,24 @@
 <p>There is no such thing as a stupid question, only stupid people.</p>
 
 <div class="user-controls controls-wrapper questions-inputs">
-    <div class="row">
+  <div class="row">
 
 
     <div class="col-sm-5 col-xs-8">
       <div class="input-group">
         <%= form_tag(questions_path, :method => "get", id: "search-form") do %>
-
-        <div class="input-group">
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
-            <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "form-control"%>
+          <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "form-control"%>
         </div>
-        <% end %>
+      <% end %>
         <% if @questions.present? %>
           <% render "form" if @question.present? %>
-        <% else %>
+      <% else %>
           <p>There are no questions containing the term(s) <%= params[:search] %>.</p>
-        <% end %>
+      <% end %>
       </div>
     </div>
 
@@ -30,7 +29,7 @@
       </form>
     </div>
     <div class="col-sm-2 col-xs-12">
-            <%= link_to 'New Question', new_question_path, class: "btn btn-codaisseur" %>
+      <%= link_to 'New Question', new_question_path, class: "btn btn-codaisseur" %>
     </div>
   </div>
   <div class="row sorting-links">
@@ -46,31 +45,36 @@
   <table class="table table-hover table-users">
     <tbody>
 
-         <% @random.each do |random| %>
-         <tr class="random-question">
-         <td style="text-align:right"> <%= render partial: "layouts/avatar", locals: { user: random.user } %></td>
-        <td><h4><%= link_to random.title, random %></h4><p><%= time_ago_in_words(random.created_at).capitalize %> ago by <%= link_to random.user.profile.full_name, controller: :profiles, action: :show, id: random.user.profile.id %></p><p class="btn btn-topic"><%= random.topic.title %></p></td>
-         <td class="text-center"><h3><%= random.answers.count %></h3><p>Answers</p>
-         </tr>
-         <% end %>
+    <% @random.each do |random| %>
+      <tr class="random-question">
+      <td style="text-align:right">
+        <%= render partial: "layouts/avatar", locals: { user: random.user } %>
+        <div style="float: left">
+          <%= render partial: "votes/widget", locals: { question: random } %>
+        </div>
+      </td>
+      <td><h4><%= link_to random.title, random %></h4><p><%= time_ago_in_words(random.created_at).capitalize %> ago by <%= link_to random.user.profile.full_name, controller: :profiles, action: :show, id: random.user.profile.id %></p><p class="btn btn-topic"><%= random.topic.title %></p></td>
+      <td class="text-center"><h3><%= random.answers.count %></h3><p>Answers</p>
+      </tr>
+    <% end %>
 
       <% @questions.each do |question| %>
         <tr>
-          <td style="text-align:right">
-            <%= render partial: "layouts/avatar", locals: { user: question.user } %>
-            <div style="float: left">
-              <%= render partial: "votes/widget", locals: { question: question } %>
-            </div>
-          </td>
-          <td><h4><%= link_to question.title, question %></h4><p><%= time_ago_in_words(question.created_at).capitalize %> ago by <%= link_to question.user.profile.full_name, controller: :profiles, action: :show, id: question.user.profile.id %></p><p class="btn btn-topic"><%= question.topic.title %></p></td>
-          <td class="text-center"><h3>
+        <td style="text-align:right">
+          <%= render partial: "layouts/avatar", locals: { user: question.user } %>
+          <div style="float: left">
+            <%= render partial: "votes/widget", locals: { question: question } %>
+          </div>
+        </td>
+        <td><h4><%= link_to question.title, question %></h4><p><%= time_ago_in_words(question.created_at).capitalize %> ago by <%= link_to question.user.profile.full_name, controller: :profiles, action: :show, id: question.user.profile.id %></p><p class="btn btn-topic"><%= question.topic.title %></p></td>
+        <td class="text-center"><h3>
             <%= question.answers.count %></h3><p>Answers</p>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-      <hr>
-       <div class= "text-center margin-top"><%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
-      </div>
-</div>
+        </td>
+      </tr>
+    <% end %>
+      </tbody>
+    </table>
+    <hr>
+    <div class= "text-center margin-top"><%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+  </div>
+  </div>
