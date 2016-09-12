@@ -51,16 +51,17 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'rack-cors', require: 'rack/cors'
+
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 
+gem "devise"
 gem "cancancan"
 
 gem 'carrierwave'
 gem 'mini_magick'
 gem "fog", require: "fog/aws/storage"
-
-gem "devise"
 
 gem "will_paginate"
 
