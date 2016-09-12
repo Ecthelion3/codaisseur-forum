@@ -58,6 +58,7 @@ gem 'bootstrap_form'
 
 gem "devise"
 gem "cancancan"
+gem 'simple_token_authentication', '~> 1.0'
 
 gem 'carrierwave'
 gem 'mini_magick'
