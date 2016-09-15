@@ -32,10 +32,15 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     authorize! :create, @question
-    if @question.save()
-      redirect_to @question
-    else
-      render :new
+
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to @question, notice: 'Product was successfully created.' }
+        format.json { render json: @question, status: :created, location: @question }
+      else
+        format.html { render :new }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
     end
   end
 
