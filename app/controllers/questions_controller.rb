@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
       end
     end
 
+    @all_questions = Question.all
+
     @random = Question.includes(:answers).where( :answers => { :question_id => nil } ).sample(3)
 
     if params[:search]
