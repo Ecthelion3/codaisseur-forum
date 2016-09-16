@@ -46,14 +46,17 @@ class QuestionsController < ApplicationController
     end
   end
 
-
   def update
-    @question = Question.find(params[:question_id])
+    @question = Question.find(params[:id])
 
-    if @question.update(question_params)
-      render json: @question
-    else
-      render json: {error: "could not update question"}
+    respond_to do |format|
+      if @question.update(question_params)
+        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
     end
   end
 
