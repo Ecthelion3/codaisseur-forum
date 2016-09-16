@@ -65,8 +65,13 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     @question.destroy
-    flash.notice = "Question '#{@question.title}' Deleted!"
-    redirect_to questions_path
+    respond_to do |format|
+      format.html {
+        flash.notice = "Question '#{@question.title}' Deleted!"
+        redirect_to questions_path
+      }
+      format.json { head :no_content }
+    end
   end
 
   def user
