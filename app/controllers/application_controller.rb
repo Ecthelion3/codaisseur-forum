@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  respond_to :html, :json
   acts_as_token_authentication_handler_for User
+  respond_to :html, :json
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
