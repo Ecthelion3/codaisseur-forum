@@ -60,6 +60,8 @@ gem "devise"
 gem "cancancan"
 gem 'simple_token_authentication', '~> 1.0'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 gem 'carrierwave'
 gem 'mini_magick'
 gem "fog", require: "fog/aws/storage"
